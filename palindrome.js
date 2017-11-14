@@ -1,3 +1,4 @@
+//Determine whether an integer is a palindrome. Do this without extra space.
 var isPalindrome = function(x) {
   if(x>-1 && x<10) {
     return true;
