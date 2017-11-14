@@ -18,3 +18,22 @@ var isPalindrome = function(x) {
 };
 
 console.log(isPalindrome(-3332))
+
+// More efficient solution
+
+var isPalindrome = function(num) {
+    if ( num == 0) {
+        return true;
+    }
+    var reversed = 0;
+  var original = num;
+    
+  if (num < 0 || (num % 10 === 0)) {
+    return false;
+  }
+  while (num > 0) {
+    reversed = (reversed * 10) + (num % 10);
+    num = Math.floor(num / 10);
+  }
+  return original == reversed;
+};
