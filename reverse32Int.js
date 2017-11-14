@@ -37,3 +37,25 @@ var reverse = function(num) {
     return num;
   }
 };
+
+// More efficient solution
+
+var reverse = function(num) {
+  var reversed = 0;
+  var neg = false;
+  if (num < 0) {
+    neg = true;
+    num = num * -1;
+  }
+  while(num > 0) {
+    reversed = (reversed * 10) + (num % 10);
+    num = Math.floor(num/10);
+  }
+  if (reversed > 2147483647) {
+    return 0;
+  }
+    if (neg) {
+    reversed = reversed * -1;
+  }
+  return reversed;
+}
