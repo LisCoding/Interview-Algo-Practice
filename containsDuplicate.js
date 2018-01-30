@@ -8,7 +8,6 @@ var containsDuplicate = function(nums) {
         if(nums[i] == nums[i+1]) {
             return true
         }
-        
     }
     return false
 };
