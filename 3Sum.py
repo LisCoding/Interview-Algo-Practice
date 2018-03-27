@@ -72,10 +72,15 @@ class Solution:
         length=len(nums)
         
         array=[]
+        if(length<3):
+          return array
+        
         i=0
         while(nums[i]<1):
-          if((nums[i]==nums[i-1]) | (nums[i]+nums[length-1]+nums[length-2]<0)):
-            i=i+i
+          if((i-1>-1) & (nums[i]==nums[i-1]) | (nums[i]+nums[length-1]+nums[length-2]<0)):
+            i=i+1
+            if(i>length-1):
+              break
             continue
           j=length-1
           k=i+1
@@ -84,11 +89,16 @@ class Solution:
               array.append([nums[i], nums[j], nums[k]])
               k=k+1
               j=j-1
-              while(nums[k]==nums[k-1]):
+              while((k-1>-1) & (nums[k]==nums[k-1])):
                 k=k+1
+                if(k>length-1):
+                  break
             elif(nums[i]+nums[j]+nums[k]<0):
               k=k+1
             else:
               j=j-1
           i=i+1
         return array
+		
+obj=Solution()
+obj.threeSum([0,0,0])
