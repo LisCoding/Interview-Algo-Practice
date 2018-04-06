@@ -1,5 +1,5 @@
 class Solution(object):
-    def fixClass(self, s, parent=None, grandparent=None, index=None):
+    def fixClass(self, s, parent=None, grandparent=None, index=None, parent_index=None):
 
         if(isinstance(s, dict)):
           for a,b in s.items():
@@ -8,7 +8,10 @@ class Solution(object):
               
         elif(isinstance(s, list)):
           for i in range(len(s)):
-            self.fixClass(s[i], s, parent, i)
+            if(index!=None):
+              self.fixClass(s[i], s, parent, i, index)
+            else:
+              self.fixClass(s[i], s, parent, i)
           
         elif(isinstance(s, str)):
           pass
@@ -21,6 +24,10 @@ class Solution(object):
             grandparent[parent]=s.__dict__
           elif(isinstance(grandparent, str)):
             parent[index]=s.__dict__
+          elif(isinstance(grandparent, list)):
+            grandparent[parent_index][index]=s.__dict__
+          else:
+            print("Need to update fixClass Method with further edge cases")
       
     
     
@@ -37,14 +44,14 @@ temp_sorted = temp.__dict__
 print(temp_sorted)
 
 
-a = {'pret': {}, 'test': {'verify': [{'param': {'intf': 'default', 'expected': {}, 'namebd': 'default', 'weight': 1, 'su_pr_flag': False, 'operation_name': 'Verifyoperation', 'skip_dut': {}, 'pw': 'default', 'group': 'default', 'keys': []}, 'retrieve_nan_domain': {'mobile': 'num3247', 'data': [{ 'id': '0', 'nan_domain': temp, 'action': 'none', 'list': [], 'state': 'high', 'group': 'Vip', 'aging': None, 'alist': [temp, temp], 'notification': 'systemprolog', }]}}]}, 'pt': {}}
+argu = {'pret': {}, 'test': {'verify': [{'param': {'intf': 'default', 'expected': {}, 'namebd': 'default', 'weight': 1, 'su_pr_flag': False, 'operation_name': 'Verifyoperation', 'skip_dut': {}, 'pw': 'default', 'group': 'default', 'keys': []}, 'retrieve_nan_domain': {'mobile': 'num3247', 'data': [{ 'id': '0', 'nan_domain': temp, 'action': 'none', 'list': [], 'state': 'high', 'group': 'Vip', 'aging': None, 'alist': [temp, [[[temp, {'mad': temp}]]]], 'notification': 'systemprolog', }]}}]}, 'pt': {}}
 
 
 
 
-print("start", a)
+print("start", argu)
 
 obj=Solution()
-print(obj.fixClass(a))
+print(obj.fixClass(argu))
 
-print('end', a)
+print('end', argu)
