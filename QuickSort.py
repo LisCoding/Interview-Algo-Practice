@@ -1,10 +1,7 @@
-import math
-
-
 class Solution(object):
-	def QuickSort(self, list, left=0,right=math.inf):
+	def QuickSort(self, list, left=0,right=None):
 	  
-	  if right==math.inf:
+	  if right==None:
 	    right = len(list)-1
 	    
 	  if left < right:
@@ -19,9 +16,9 @@ class Solution(object):
 	 
 	def partition(self, list, left, right):
 
-	  pivot = list[left]
-	  
-	  while (right>left):
+	  pivot = left
+
+	  while (right>=left):
 	    while (left<=right and list[left] <= list[pivot]):
 	      left+=1
 	    while (list[right] > list[pivot]):
@@ -34,7 +31,7 @@ class Solution(object):
 	      
 	  if (list[right] < list[pivot]):
 	    list[right], list[pivot] = list[pivot], list[right]
-	  print('bye', list, left, right, pivot)
+	 # print('bye', list, list[right], list[pivot])
 	    
 	  return right
 	  
