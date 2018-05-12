@@ -6,12 +6,8 @@ var reverseTightly = function(x) {
 };
 
 var reverse = function(x) {
-    let neg = false;
-    if (x<0){
-        neg = true;
-    }
     let temp = parseInt(x.toString().split('').reverse().join(''))
-    return temp > 2147483647 ? 0 : neg ? -temp : temp
+    return temp > 2147483647 ? 0 : x < 0 ? -temp : temp
 };
 
 
