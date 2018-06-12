@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Lab 10</title>
+    <style>
+        .myClass {
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body>
+<div style= "background-color: yellow" id="original">
+<h2>
+I love watching movies,<br>
+This one is my favorite:
+</h2>
+</div>
+
+
+<script>
+setTimeout(myFunction, 1000)
+function myFunction() {
+    var movie = prompt("Please enter your name", " The Avengers");
+    if (movie != null) {
+        g = document.createElement('div');
+        g.setAttribute("class", "myClass");
+        g.innerHTML = movie + " is a good movie";
+        original = document.getElementById("original")
+        original.parentNode.insertBefore(g, original)
+        setTimeout(myFunctionTwo, 1000)
+    }
+}
+function myFunctionTwo() {
+    var movieTwo = prompt("One of my favorites", "The Bourne Ultimatum");
+    if (movieTwo != null) {
+        var textnode = document.createTextNode(movieTwo);
+        var node = document.createElement("h1");
+        node.appendChild(textnode); 
+        document.body.appendChild(node)
+
+        h = document.createElement('div');
+        h.setAttribute("class", "myClass");
+        h.innerHTML = "'A picture is worth a thousand words'<br>";
+        h.innerHTML += "<img src='https://vignette.wikia.nocookie.net/bourne/images/6/60/The_Bourne_Identity_Soundtrack.jpg/revision/latest?cb=20121102012530'>"
+        document.body.appendChild(h)
+    }
+}
+
+</script>
+</body>
+</html>
