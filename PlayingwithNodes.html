@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Lab 11</title>
+    <style>
+        div {
+            width: 50%;height: 100px;padding: 10px;margin: 10px 0;
+        }
+        #myId {
+            background-color: yellow;
+        }
+        .myClass {
+            background-color: lightgreen;
+            border: 5px solid red;
+        }
+    </style>
+</head>
+<body>
+<div id="myId">
+    <h1 onclick="myFunction()">
+        Click me to add a new movie
+    </h1>
+</div>
+<script>
+    function myFunction() {
+        let movie = prompt("Please enter your movie", " The Avengers");
+        let parentNode = document.getElementById("myId").parentNode
+        let newClass = document.createElement('div');
+        newClass.setAttribute("class", "myClass");
+        // var textnode = document.createTextNode(movie);
+        let child =document.createElement("h1")
+        child.innerHTML = movie
+        newClass.appendChild(child);
+        parentNode.insertBefore(newClass, document.getElementById("myId"))
+    }
+</script>
+</body>
+</html>

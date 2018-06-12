@@ -1,0 +1,48 @@
+<html lang="en">
+<head>
+    <title>Assignment 5</title>
+</head>
+
+<style type = "text/css">
+    #positionId1 {
+        
+        font-size: 2pc;
+        font-weight: bold;
+        color: green;
+        width: 250px;
+        height: 300px;
+        text-align: center;
+        background-color: yellow;
+        position: absolute;
+        top: 0;
+        left: 0;
+        
+    }
+</style>
+
+<body onclick= "showCoords(event)" id= "demo">
+<div id= "positionId1">
+This is
+What's new today
+
+<img src= "https://sagecity.na.sage.com/cfs-file/__key/communityserver-blogs-components-weblogfiles/00-00-00-00-83/take-a-look-at-what_2700_s-new.png">
+
+</div>
+
+
+	<script>
+function showCoords(event) {
+    var cX = event.clientX;
+    var pX = event.pageX;
+    var cY = event.clientY;
+    var pY = event.pageY;
+	// div.setAttribute("id", "positionId2");
+    var coords1 = "client - X: " + cX + ", Y coords: " + cY;
+    var coords2 = "screen - X: " + pX + ", Y coords: " + pY;
+	// document.getElementById("positionId1").innerHTML = coords1 + "<br>" + coords2;
+    document.getElementById("positionId1").style.top = cY;
+    document.getElementById("positionId1").style.left = cX;
+}
+	</script>
+</body>
+</html>
