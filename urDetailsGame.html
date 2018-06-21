@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Lab 14</title>
+    <style>
+    </style>
+</head>
+<body>
+</body>
+<script>
+    myPromt()
+    function myPromt() {
+        let month = prompt("What month were you born in?", 12);
+        let day = prompt("What day were you born on?", 06);
+        let year = prompt("What year were you born in?", 1980);
+
+        let now = new Date();
+        let original_birthday = new Date(year, month, day);
+        let age_in_secs = now - original_birthday;
+        let next_birthday = new Date(now.getFullYear(), month, day);
+        let to_birthday = new Date(next_birthday- now);
+        
+        let age_in_years = Math.floor(age_in_secs/31536000000);
+
+        let to_birthday_months = Math.floor((to_birthday % 31536000000)/2628000000);
+        let to_birthday_days = Math.floor(((to_birthday % 31536000000) % 2628000000)/86400000);
+        let to_birthday_hours = Math.floor((((to_birthday % 31536000000) % 2628000000) % 6400000)/3600000);
+        let to_birthday_minutes = Math.floor(((((to_birthday % 31536000000) % 2628000000) % 6400000) % 3600000)/60000);
+        let to_birthday_seconds = Math.floor((((((to_birthday % 31536000000) % 2628000000) % 6400000) % 3600000) % 60000)/1000);
+        
+        let num_days = Math.floor(((age_in_secs % 31536000000) % 2628000000)/86400000);
+        let num_hours = Math.floor((((age_in_secs % 31536000000) % 2628000000) % 6400000)/3600000);
+        let num_minutes = Math.floor(((((age_in_secs % 31536000000) % 2628000000) % 6400000) % 3600000)/60000);
+        let num_seconds = Math.floor((((((age_in_secs % 31536000000) % 2628000000) % 6400000) % 3600000) % 60000)/1000);
+        
+        let age_days = age_in_years*365 + num_days;
+        let age_hours = age_days*24 + num_hours;
+        let age_minutes = age_hours*60 + num_minutes;
+        let age_seconds = age_minutes*60 + num_seconds;
+
+        document.write("<h1>My Age</h1><br><br>");
+        document.write("Today is ", now, "<br><br>");
+        document.write("I was born on ", find_month(month), " ", day, " ", year, ". (", month, "/", day, "/", year, ")<br><br>");
+        document.write("I am ", age_in_years, " years old, and will turn ", age_in_years+1, " in:<br><br>");
+        document.write(to_birthday_months, " months, ", to_birthday_days, " days, ", to_birthday_hours, " hours, ", to_birthday_minutes, " minutes, ", to_birthday_seconds, " seconds<br><br>")
+        document.write("I have been alive for...<br><br>")
+        document.write(age_days, " days, ", num_hours, " hours, ", num_minutes, " minutes, ", num_seconds, " seconds")
+    }
+
+    function find_month(number){
+        months = ["January", "Februrary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        return months[number-1];
+    }
+</script>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Lab 13</title>
+    <style>
+    </style>
+</head>
+<body>
+</body>
+<script>
+    myFunction()
+    function myFunction() {
+
+        let red = Math.floor(Math.random()*255);
+        let green = Math.floor(Math.random()*255);
+        let blue = Math.floor(Math.random()*255);
+
+        let red_hex = red.toString(16);
+        let green_hex = green.toString(16);
+        let blue_hex = blue.toString(16);
+
+        if (red.length < 10)
+            red_hex = "0" + red_hex;
+        if (green.length < 10)
+            green_hex = "0" + green_hex;
+        if (blue.length < 10)
+            blue_hex = "0" + blue_hex;
+
+        let hex = "#"+red_hex+green_hex+blue_hex;
+
+        document.body.innerHTML = '';
+        document.write("BACKGROUND-COLOR IS RANDOMLY GENERATED<br><br>");
+        document.write("RGB(", red, ",", green, ",", blue, ")<br><br>");
+        document.write("HEX: ", hex, "<br><br>");
+
+        document.body.style.backgroundColor = hex;
+
+        document.write("<a onclick='myFunction()' style='color:blue; text-decoration:underline;'>CLICK TO RANDOM</a>")
+    }
+</script>
+</html>
