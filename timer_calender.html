@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Assignment 6</title>
+    <meta charset="utf-8">
+    <style type="text/css">
+        table, th, td{
+            font-size: 1.2em;
+            border: 1px solid black;
+        }
+
+        th, td{
+            vertical-align: top;
+            border: none;
+        }
+
+        th{
+            background-color: #000;
+            color: #fff;
+            text-align: left;
+        }
+
+        tr:nth-of-type(even){
+            background-color: #F3F3F3;
+        }
+
+        tr:nth-of-type(odd){
+            background-color:#ddd;
+        }
+    </style>
+</head>
+<body onload="startclock()">
+    <h2>The time now is <span id="time">00:00:00</span></h2>
+    <h2 id="greet_place"></h2>
+    <h2 id="quote_place"></h2>
+</body>
+<script type="text/javascript">
+    //      Greetings according to the time of the day:     //
+    function myObject(greeting, color){
+        this.greeting = greeting;
+        this.color = color;
+    }
+    let greet_one = new myObject("What are you doing that early?", "orange");
+    let greet_two = new myObject("Good Morning", "greenyellow");
+    let greet_three = new myObject("Good Afternoon", "yellow");
+    let greet_four = new myObject("Good Evening", "lightcoral");
+
+    function myGreet(){
+        let time_of_the_day = new Date().getHours();
+        let greet_place = document.getElementById("greet_place");
+        switch (true) {
+            case (time_of_the_day < 6):
+                greet_place.innerHTML = greet_one.greeting;
+                document.body.style.backgroundColor = greet_one.color;
+                break;
+            case (time_of_the_day < 12):
+                greet_place.innerHTML = greet_two.greeting;
+                document.body.style.backgroundColor = greet_two.color;
+                break;
+            case (time_of_the_day < 18):
+                greet_place.innerHTML = greet_three.greeting;
+                document.body.style.backgroundColor = greet_three.color;
+                break;
+            case (time_of_the_day < 24):
+                greet_place.innerHTML = greet_four.greeting;
+                document.body.style.backgroundColor = greet_four.color;
+                break;
+        }
+    }
+    myGreet();
+
+
+    //      A random quote each time the page is loaded         //
+    function myQuotes(){
+        let the_quotes = ['Be yourself; everyone else is already taken.', 'Be the change that you wish to see in the world.', 'If you tell the truth, you don\'t have to remember anything.', 'Life is what happens to us while we are making other plans.'];
+        let random_index = Math.floor(Math.random()*the_quotes.length);
+        let quote_place = document.getElementById("quote_place");
+        quote_place.innerHTML = the_quotes[random_index];
+    }
+    myQuotes();
+
+    //                  A real time clock.              //
+    let timerID = null;
+    let timerRunning = false;
+    // stop the clock
+    function stopclock() {
+        if (timerRunning) {
+        clearTimeout(timerID);
+        timerRunning = false;
+        }
+    }
+    // start the clock
+    function startclock() {
+        // make sure the clock is stopped
+        stopclock();
+        showtime();
+    }
+    // actually display the time
+    function showtime() {
+        let now = new Date();
+        let hours = now.getHours();
+        let minutes = now.getMinutes();
+        let seconds = now.getSeconds();
+        let timeValue = "" + ((hours>12)?hours-12: hours);
+        timeValue += ((minutes<10)?":0" : ":") + minutes;
+        timeValue += ((seconds<10)?":0" : ":") + seconds;
+        timeValue += ((hours>=12)?" P.M." : " A.M.");
+        // display to the screen
+        let timeplace = document.getElementById("time");
+        timeplace.childNodes[0].nodeValue = timeValue;
+        timerID = setTimeout("showtime()", 1000);
+        timerRunning = true;
+    }
+
+    //          A calendar for the current month and year               //
+
+    monthnames = new Array(
+    "January", "Februrary", "March", "April",
+    "May", "June", "July", "August", "September",
+    "October", "November", "December");
+
+    var linkcount=0;
+    function addlink(month, day, href) {
+    var entry = new Array(3);
+    entry[0] = month;
+    entry[1] = day;
+    entry[2] = href;
+    this[linkcount++] = entry;
+    }
+
+    Array.prototype.addlink = addlink;
+
+    linkdays = new Array();
+    monthdays = new Array(12);
+    monthdays[0]=31;
+    monthdays[1]=28;
+    monthdays[2]=31;
+    monthdays[3]=30;
+    monthdays[4]=31;
+    monthdays[5]=30;
+    monthdays[6]=31;
+    monthdays[7]=31;
+    monthdays[8]=30;
+    monthdays[9]=31;
+    monthdays[10]=30;
+    monthdays[11]=31;
+
+    todayDate=new Date();
+    thisday=todayDate.getDay();
+    thismonth=todayDate.getMonth();
+    thisdate=todayDate.getDate();
+
+    thisyear = todayDate.getYear();
+    thisyear = thisyear % 100;
+
+    thisyear = ((thisyear < 50) ? (2000 + thisyear) : (1900 + thisyear));
+
+    if (((thisyear % 4 == 0)
+    && !(thisyear % 100 == 0))
+    ||(thisyear % 400 == 0)) monthdays[1]++;
+
+    startspaces = thisdate;
+    while (startspaces > 7) startspaces -=7;
+    startspaces = thisday - startspaces + 1;
+
+    if (startspaces < 0) startspaces +=7;
+
+    document.write("<table style='margin:auto'>");
+    document.write("<tr><td colspan=7 style='text-align:center'>"
+    + monthnames[thismonth] + " " + thisyear
+    + "</td></tr>");
+    document.write("<tr>");
+    document.write("<td align=center>Su</td>");
+    document.write("<td align=center>M</td>");
+    document.write("<td align=center>Tu</td>");
+    document.write("<td align=center>W</td>");
+    document.write("<td align=center>Th</td>");
+    document.write("<td align=center>F</td>");
+    document.write("<td align=center>Sa</td>");
+    document.write("</tr>");
+    document.write("<tr>");
+
+    for (i=0;i<startspaces;i++) {
+    document.write("<td> </td>");
+    }
+
+    count=1;
+    while (count <= monthdays[thismonth]) {
+    for (b = startspaces;b<7;b++) {
+    linktrue=false;
+    document.write("<td>");
+
+    for (c=0;c<linkdays.length;c++) {
+    if (linkdays[c] != null) {
+    if ((linkdays[c][0]==thismonth + 1) && (linkdays[c][1]==count)) {
+    //document.write("<a href=\"" + linkdays[c][2] + "\">");
+    document.write(linkdays[c][2]);
+    linktrue=true;
+        }
+    }
+    }
+
+    if (count==thisdate) {
+    document.write("<span style='color:red'>");
+    }
+
+    if (count <= monthdays[thismonth]) {
+    document.write(count);
+    }
+    else {
+    document.write(" ");
+    }
+
+    if (count==thisdate) {
+    document.write("</span>");
+    }
+
+    if (linktrue)
+    //document.write("</a>");
+    document.write("</td>");
+    count++;
+    }
+    document.write("</tr>");
+    document.write("<tr>");
+    startspaces=0;
+    }
+    document.write("</table>");
+</script>
+</html>

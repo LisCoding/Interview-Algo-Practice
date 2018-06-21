@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Lab 15</title>
+    <style>
+    </style>
+</head>
+<body>
+    <h1>Click on the link to see a website</h1>
+    <a href="" id="my_id"></a>
+</body>
+<script>
+    function myObject(URL, name){
+        this.URL = URL;
+        this.name = name;
+    }
+    let obj_one = new myObject("https://abc.go.com/", "ABC");
+    let obj_two = new myObject("https://www.cbs.com/", "CBS");
+    let obj_three = new myObject("https://www.hbo.com/", "HBO");
+    let obj_four = new myObject("https://www.discovery.com/", "Discovery");
+    let obj_five = new myObject("https://www.google.com/", "Google");
+
+    let myArray = [obj_one, obj_two, obj_three, obj_four, obj_five];
+
+    function myUpdate(){
+        let current_minute = new Date().getMinutes();
+        let index = current_minute % myArray.length;
+
+        document.getElementById("my_id").innerHTML = myArray[index].name
+        document.getElementById("my_id").href = myArray[index].URL
+        setTimeout('myUpdate()', 60000)
+    }
+
+    myUpdate()
+</script>
+</html>
