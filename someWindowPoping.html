@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Delete Operator Example</title>
+    <style>
+      body  {
+          background-image: url("http://www.nerdspan.com/wp-content/uploads/2013/05/IRON-MAN-3-Promo.jpg");
+      }
+      a {
+        color: blue;
+      }
+      </style>
+</head>
+<body>
+    <p style='text-align: center'>Top Gun</p>
+    <script type="text/javascript">
+
+      var PopUp = null;
+
+      function PopUpWindow(url, name) {
+        return window.open(url,name,"height=800,width=800,resizable");
+      }
+
+      function closePop() {
+        if (PopUp != null) {
+          PopUp.close();
+          PopUp = null;
+        }
+      }
+
+      var movie1 = new Object();
+      movie1.title = "Iron Man 3";
+      movie1.actor = "Tom Curise";
+      movie1.url1 = "https://www.imdb.com/title/tt0092099/";
+      movie1.url2 = "https://www.imdb.com/title/tt0111161/";
+
+      var newWin = PopUpWindow(window.movie1.url, 'myWin');
+
+      newWin.document.write("<H1><p><center>What about the moves?</center></p></H1><BR><BR>");
+      newWin.document.write("<p>Marvel's Iron Man 3 pits brash-but-brilliant industrialist Tony Stark/Iron Man against an enemy whose reach knows no bounds. When Stark finds his personal world destroyed at his enemy's hands, he embarks on a harrowing quest to find those responsible. This journey, at every turn, will test his mettle. With his back against the wall, Stark is left to survive by his own devices, relying on his ingenuity and instincts to protect those closest to him. As he fights his way back, Stark discovers the answer to the question that has secretly haunted him: does the man make the suit or does the suit make the man?</p><BR>");
+      
+      
+      newWin.document.write("<p><a name=" + window.movie1.url1 + " onclick=movieWin=window.open(this.name);>CLICK HERE TO ACCESS THE MOVIE WINDOW</a></p><BR>");      
+      newWin.document.write("<p><a name=" + window.movie1.url2 + " onclick=actorWin=window.open(this.name);>CLICK HERE TO ACCESS THE ACTOR WINDOW</a></p><BR>");      
+      newWin.document.write("<p><a onclick=movieWin.close()>CLICK HERE TO CLOSE THE MOVIE WINDOW</a></p><BR>");
+      newWin.document.write("<p><a onclick=actorWin.close()>CLICK HERE TO CLOSE THE ACTOR WINDOW</a></p><BR>");
+      newWin.document.write("<p><a onclick=window.close()>CLICK HERE TO CLOSE THIS WINDOW</a></p><BR>");
+      
+      
+      document.write("<p>Opening a new window with a URL.</p>");
+      document.write("<p>This window's name is: " + newWin.name + "</p>");
+
+    </script>
+</body>
+</html>

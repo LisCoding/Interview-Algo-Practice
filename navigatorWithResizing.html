@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body  {
+            background-image: url("http://www.nerdspan.com/wp-content/uploads/2013/05/IRON-MAN-3-Promo.jpg");
+            /* background-color: #cccccc; */
+        }
+    </style>
+</head>
+<body>
+
+<p>Open a new window, and resize the width and height to 500px:</p>
+
+<script>
+var myWindow = window.open("", "", "width=500, height=500");
+myWindow.document.write("<body style='background:yellow; color:blue'>");
+myWindow.document.write("The appCodeName is: " + navigator.appCodeName + "<BR>")
+myWindow.document.write("The appVersion is: " + navigator.appVersion + "<BR>");
+
+function resizeWin() {
+    myWindow.resizeTo(screen.availHeight/3, screen.availWidth/3);
+    myWindow.focus();
+}
+
+setTimeout("resizeWin();",2000);
+
+</script>
+
+</body>
+</html>
