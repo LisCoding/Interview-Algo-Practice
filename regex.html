@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Lab 12</title>
+    <style>
+        body {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+</body>
+<script type="text/javascript">
+
+    setTimeout(myPromt, 1000)
+    // myFunction()
+
+    function myPromt() {
+        let input = prompt("Please enter a text(stop to exit)", "stop");
+        myFunction(input)
+    }
+
+    function myFunction(input) {
+
+        document.body.innerHTML = '';
+        document.write("<h2>The text is: ", input, "</h2>");
+
+        let text_one = "Match a string that contains at least one character in A-Z, a-z, 0-9 and _";
+        let exp_one = /[A-Za-z0-9_]+/;
+        let text_two = "Match a string that does not contain a number between 0 and 9";
+        let exp_two = /[^0-9]/;
+        let text_three = "Search for an uppercase letter, followed by one or more lowercase letters, followed by a space";
+        let exp_three = /[A-Z][a-z]+\s/;
+        let text_four = "Find a # sign, followed by exactly 5 repeating digits, a period, and another digit";
+        let exp_four = /[#][0-9]{5}[.]*[0-9]/;
+
+        check(input, text_one, exp_one);
+        check(input, text_two, exp_two);
+        check(input, text_three, exp_three);
+        check(input, text_four, exp_four);
+
+        if(input != 'stop'){
+            setTimeout(myPromt, 1000);
+        }
+        document.body.style.backgroundColor = "yellow";
+    }
+
+    function check(input, text, exp){
+
+        let success = "It's a match<br><br>";
+        let failure = "No match<br><br>"
+
+        document.write(text, "<br><br>");
+        if(exp.test(input)){
+            document.write(success);
+        } else {
+            document.write(failure);
+        }
+    }
+</script>
+</html>
