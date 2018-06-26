@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>lab 17</title>
+  <meta charset="utf-8">
+</head>
+<body>
+    <h1>You  have visited <span id='count'></span> time(s). <span id="phrase"></span></h1>
+    <button name="revisit" onclick="increase_count()">Revisit Page</button>
+    <button name="reset" onclick="delete_cookie()">Reset Counter</button>
+<script type="text/javascript">
+
+    // CookieUtil Library to GET, SET and UNSET cookie
+var CookieUtil = {
+
+    get: function (name){
+        var cookieName = encodeURIComponent(name) + "=",
+            cookieStart = document.cookie.indexOf(cookieName),
+            cookieValue = null,
+            cookieEnd;
+
+        if (cookieStart > -1){
+            cookieEnd = document.cookie.indexOf(";", cookieStart);
+            if (cookieEnd == -1){
+                cookieEnd = document.cookie.length;
+            }
+            cookieValue = decodeURIComponent
+            (document.cookie.substring(cookieStart + cookieName.length, cookieEnd));
+        }
+        return cookieValue;
+    },
+
+    set: function (name, value, expires, path, domain, secure) {
+        var cookieText = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+
+        if (expires instanceof Date) {
+            cookieText += "; expires=" + expires.toGMTString();
+        }
+
+        if (path) {
+            cookieText += "; path=" + path;
+        }
+
+        if (domain) {
+            cookieText += "; domain=" + domain;
+        }
+
+        if (secure) {
+            cookieText += "; secure";
+        }
+
+        document.cookie = cookieText;
+    },
+
+    unset: function (name, path, domain, secure){
+        this.set(name, "", new Date(0), path, domain, secure);
+    }
+};
+
+// Read cookie when page loads
+window.addEventListener('load', function() {
+    read_cookie();
+});
+
+// Set the number and phrase.
+function read_cookie(){
+
+    let rval = CookieUtil.get("cookie_count");
+    rval = parseInt(rval)
+    if (rval) {
+        document.getElementById("count").innerHTML = rval;
+        set_phrase(rval-1);
+        set_cookie(rval+1);
+    }
+    else {
+        document.getElementById("count").innerHTML = 1;
+        set_cookie(2);
+        set_phrase(0);
+    }
+}
+// Increase the visit count and then refresh page
+function increase_count() {
+    let rval = parseInt(document.getElementById("count").innerHTML);
+    set_cookie(rval+1);
+    window.location.reload();
+}
+// Set the cookie in the browser
+function set_cookie(number){
+    CookieUtil.set("cookie_count", number);
+}
+// Delete the cookie in the browser
+function delete_cookie(){
+    CookieUtil.unset("cookie_count");
+    window.location.reload();
+}
+// Set phrase depending on the visit number.
+function set_phrase(number){
+    let myArray = ['Welcome to my page!', 'I see you came back!', 'Oh, it\'s you again!', 'You must be curious!', 'This is your 5th time!', 'This is your 6th time!', 'This is you 7th time!', 'This is your 8th time!', 'This is your 9th time!', 'This is your 10th time!'];
+    number = number%10;
+    document.getElementById("phrase").innerHTML = myArray[number];
+}
+</script>
+</body>
+</html>
