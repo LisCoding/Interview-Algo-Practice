@@ -60,7 +60,7 @@ class Solution:
           return -1
 
         if slide == None:
-          slide = self.slider(nums, left, right)
+          slide = self.better_slider(nums, left, right)
           print("slide by: ", slide)
         
         if nums[0] <= target and slide != -1:
@@ -74,7 +74,19 @@ class Solution:
             temp += 1
           return temp
         return -1
+    
+    def better_slider(self, nums, left=0, right=None):
 
-nums = [6,7,8,1,2,3,4,5];        
+        mid = (left+right)//2
+        
+        if left == right:
+          return -1
+        if (nums[mid] > nums[mid-1] and nums[mid] > nums[mid+1]):
+          return mid
+        if (nums[left]>nums[mid]):
+          return self.better_slider(nums, left, mid)
+        return self.better_slider(nums, mid+1, right)
+
+nums = [1,2,3,4];        
 my_object = Solution()
-print(my_object.rotated_search(nums, 7))
+print(my_object.rotated_search(nums, 1))
